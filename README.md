@@ -10,12 +10,15 @@ This project simulates how the CAN Transport Protocol (CanTP) works by using the
 - **Flow Control**: Sends flow control messages to the transmitter to manage the transmission.
 - **Bit Padding Removal**: Removes padding bits if present in the incoming message.
 - **Byte Array Assembly**: Combines the received bytearray into a complete string.
+- **Send CAN STANDARD and CAN FD**: Send and receive both CAN STANDARD and CAN FD.
 
+  
 ## Requirements
 To run this simulation, you need the following dependencies:
 - `python-can` library
-- Python 3.6 or higher
+- Python 3.9 
 
-You can install the required libraries using `pip`:
-```bash
-pip install python-can
+## Example: Switching Between CAN Standard and CAN FD
+To switch between sending CAN Standard and CAN FD, you can modify the second parameter in the following code:
+```python
+cantp.send_data(data, SEND_MESSAGE_TYPE.FLEXCAN)
