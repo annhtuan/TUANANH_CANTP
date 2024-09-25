@@ -232,6 +232,7 @@ class CanTpTransmit:
                 elapsed_time = time.time() - start_time
                 if recv_msg and recv_msg.arbitration_id == 0x789:  # Example FC arbitration ID
                     data = recv_msg.data
+                    #Continue to send
                     if data[0] == 0x30:
                         self.bs = data[1]
                         self.stmin = data[2]
@@ -239,11 +240,13 @@ class CanTpTransmit:
                         print(f"Received Flow Control CTS: BS={self.bs}")
                         print("                ")
                         break
+                    #wait
                     elif data[0] == 0x31:
                         print("                ")
                         print(f"Received Flow Control WAIT")
                         time.sleep(0.5)
                         continue
+                    #overflow
                     elif data[0] == 0x32:
                         self.flag_overflow = True
                         print("                ")
@@ -265,37 +268,20 @@ class CanTpTransmit:
                 time.sleep(0.2)
 
 if __name__ == "__main__":
-    cantp = CanTpTransmit()  # Use vcan0, replace with real channel for actual CAN
-    # x = 5000# Example: number of elements
-    # data = [random.randint(0x00, 0xFF) for _ in range(x)]
-    # print(f"do dai data = {len(data)}")
-    # Z = "ABCDE"
-    # y = """A study from the University of South Australia has found that babies born to mothers with a high-fat,.
-    # high-sugar diet may face an increased risk of heart disease and diabetes later in life. Researchers studied baboons,.
-    # feeding pregnant females unhealthy diets and comparing the heart tissues of their offspring to those born from mothers.
-    # on healthy diets. They found that the unhealthy diet led to reduced levels of the thyroid hormone T3, essential for .
-    # proper heart development, potentially leading to long-term cardiovascular and metabolic issues, even if babies were .
-    # born at a normal weight.The findings suggest that the effects of poor maternal nutrition may persist into adulthood,.
-    # increasing the risk of heart problems and insulin resistance, conditions that contribute to diabetes. The researchers recommend early .
-    # cardiometabolic health screening for babies born to mothers with such diets to detect potential health risks.
-    # This study, published in *The Journal of Physiology*, highlights the long-term impact of maternal diet on fetal development and future health outcomes."""
-    # #data = [ord(char) for char in Z]
-    # cantp.send_data(data,SEND_MESSAGE_TYPE.STANDARD)
+    cantp = CanTpTransmit()  
     while True:
-        # Nhập chuỗi từ bàn phím
-        print("enter your string (press enter to abort)")
-        input_string = input("Nhập chuỗi dữ liệu (nhấn Enter để thoát): ")
+        #enter string from keyboard
+        input_string = input("Enter the data string (press Enter to exit): ")
         
-        # Nếu chuỗi rỗng (người dùng chỉ nhấn Enter), thoát vòng lặp
+        # If the string is empty (the user just pressed Enter), exit the loop
         if input_string == "":
-            print("Hủy truyền tin nhắn.")
+            print("Stop Send Message.")
             break
         
-        # Chuyển đổi chuỗi thành mảng số nguyên (dựa trên mã ASCII của các ký tự)
+        # Convert string to integer array (based on ASCII code of characters)
         data = list(input_string.encode('utf-32'))
-        print(f"do dai data = {len(data)}")
         
-        # Gửi dữ liệu qua CAN
+        # Send data
         cantp.send_data(data, SEND_MESSAGE_TYPE.FLEXCAN)
 
     
