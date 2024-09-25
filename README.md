@@ -22,7 +22,7 @@ To run this simulation, you need the following dependencies:
   - `python-can`
   - `python_ics`
   - `filelock`
-Additionally, you need to install the **RP1210 J2534 API Install Kit** driver, which can be downloaded from the following link:  
+-Additionally, you need to install the **RP1210 J2534 API Install Kit** driver, which can be downloaded from the following link:  
 [RP1210 J2534 API Install Kit](https://intrepidcs.com/products/software/vehicle-spy/vehicle-spy-evaluation/)
 ## Example: Switching Between CAN Standard and CAN FD
 To switch between sending CAN Standard and CAN FD, you can modify the second parameter in the following code:
