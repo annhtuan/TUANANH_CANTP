@@ -17,7 +17,7 @@ class CanTpTransmit:
         self.flag_overflow = False
         self.bus = can.Bus(channel = 1 , bitrate = 500000, interface = 'neovi',fd = True,receive_own_message = False)
 
-    #deconstructor
+    #Deconstructor
     def __del__(self):
         self.bus.shutdown()
     def send_data(self, data,send_message_type):
