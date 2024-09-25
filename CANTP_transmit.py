@@ -279,7 +279,7 @@ if __name__ == "__main__":
             break
         
         # Convert string to integer array (based on ASCII code of characters)
-        data = list(input_string.encode('utf-32'))
+        data = list(input_string.encode('utf-8'))
         
         # Send data
         cantp.send_data(data, SEND_MESSAGE_TYPE.FLEXCAN)
