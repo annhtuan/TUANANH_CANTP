@@ -23,7 +23,7 @@ class CanTpReceiver:
         self.cf_count = 0  # Count the number of Consecutive Frames received
         self.bus = can.Bus(channel = 1 , bitrate = 500000, interface = 'neovi',fd = True,receive_own_message = False)
         self.buffer = 0
-        self.CURRENT_BUFFER = 50
+        self.CURRENT_BUFFER = 200
     #deconstructor
     def __del__(self):
         self.bus.shutdown()
@@ -263,7 +263,7 @@ class CanTpReceiver:
         self.received_length = 0
         self.cf_count = 0
         self.buffer = 0
-        CURRENT_BUFFER = 200
+        self.CURRENT_BUFFER = 200
 
 if __name__ == "__main__":
     receiver = CanTpReceiver()
